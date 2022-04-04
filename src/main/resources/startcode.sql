@@ -29,7 +29,7 @@ CREATE TABLE `bottom` (
                           `Bottom_Name` varchar(45) NOT NULL,
                           `Pricing` int NOT NULL,
                           PRIMARY KEY (`Bottom_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `bottom` (
 
 LOCK TABLES `bottom` WRITE;
 /*!40000 ALTER TABLE `bottom` DISABLE KEYS */;
+INSERT INTO `bottom` VALUES (1,'chocolate',5),(2,'vanilla',5),(3,'nutmeg',5),(4,'pistacio',6),(5,'almond',7);
 /*!40000 ALTER TABLE `bottom` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +109,7 @@ CREATE TABLE `top` (
                        `Top_Name` varchar(45) NOT NULL,
                        `Pricing` int NOT NULL,
                        PRIMARY KEY (`Top_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,6 +118,7 @@ CREATE TABLE `top` (
 
 LOCK TABLES `top` WRITE;
 /*!40000 ALTER TABLE `top` DISABLE KEYS */;
+INSERT INTO `top` VALUES (1,'chocolate',5),(2,'blueberry',5),(3,'raspberry',5),(4,'crispy',6),(5,'strawberry',6),(6,'rum/rasin',7),(7,'orange',8),(8,'lemon',8),(9,'blue cheese',9);
 /*!40000 ALTER TABLE `top` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,4 +158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-04 12:01:12
+-- Dump completed on 2022-04-04 12:13:38

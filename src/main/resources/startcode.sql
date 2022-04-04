@@ -20,10 +20,10 @@ USE `Cupcake`;
 CREATE TABLE IF NOT EXISTS `Cupcake`.`User`
 (
     `User_ID`  INT         NOT NULL AUTO_INCREMENT,
-    `Email`    VARCHAR(45) NOT NULL,
-    `Password` VARCHAR(45) NOT NULL,
-    `Role`     VARCHAR(45) NOT NULL,
-    `Saldo`    INT         NOT NULL,
+    `username` VARCHAR(45) NOT NULL,
+    `password` VARCHAR(45) NOT NULL,
+    `role`     VARCHAR(45) NOT NULL,
+    `saldo`    INT         NOT NULL,
     PRIMARY KEY (`User_ID`)
 )
     ENGINE = InnoDB;

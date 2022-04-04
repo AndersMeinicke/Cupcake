@@ -1,57 +1,102 @@
-CREATE DATABASE  IF NOT EXISTS `startcode` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `startcode`;
+-- MySQL Workbench Forward Engineering
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
---
--- Table structure for table `user`
---
+-- -----------------------------------------------------
+-- Schema Cupcake
+-- -----------------------------------------------------
 
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `role` varchar(45) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -----------------------------------------------------
+-- Schema Cupcake
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `Cupcake` DEFAULT CHARACTER SET utf8 ;
+USE `Cupcake` ;
 
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('admin','1234','admin'),('user','1234','user');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- -----------------------------------------------------
+-- Table `Cupcake`.`User`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Cupcake`.`User` (
+                                                `User_ID` INT NOT NULL AUTO_INCREMENT,
+                                                `Email` VARCHAR(45) NOT NULL,
+    `Password` VARCHAR(45) NOT NULL,
+    `Role` VARCHAR(45) NOT NULL,
+    `Saldo` INT NOT NULL,
+    PRIMARY KEY (`User_ID`))
+    ENGINE = InnoDB;
 
 
-/* Create test database from startcode structure */
+-- -----------------------------------------------------
+-- Table `Cupcake`.`Ordre`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Cupcake`.`Ordre` (
+                                                 `Ordre_ID` INT NOT NULL AUTO_INCREMENT,
+                                                 `User_ID` INT NOT NULL,
+                                                 `Total_Price` INT NOT NULL,
+                                                 `Ordrelinje_ID` INT NOT NULL,
+                                                 PRIMARY KEY (`Ordre_ID`),
+    INDEX `fk_Ordre_User_idx` (`User_ID` ASC) VISIBLE,
+    CONSTRAINT `fk_Ordre_User`
+    FOREIGN KEY (`User_ID`)
+    REFERENCES `Cupcake`.`User` (`User_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
 
-CREATE DATABASE  IF NOT EXISTS `startcode_test` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `startcode_test`;
-CREATE TABLE startcode_test.user LIKE startcode.user;
+
+-- -----------------------------------------------------
+-- Table `Cupcake`.`Ordrelinje`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Cupcake`.`Ordrelinje` (
+                                                      `Ordrelinje_ID` INT NOT NULL AUTO_INCREMENT,
+                                                      `Bottom_ID` INT NOT NULL,
+                                                      `Top_ID` INT NOT NULL,
+                                                      `Quantity` INT NOT NULL,
+                                                      INDEX `fk_Ordrelinje_Ordre1_idx` (`Ordrelinje_ID` ASC) VISIBLE,
+    PRIMARY KEY (`Ordrelinje_ID`),
+    CONSTRAINT `fk_Ordrelinje_Ordre1`
+    FOREIGN KEY (`Ordrelinje_ID`)
+    REFERENCES `Cupcake`.`Ordre` (`Ordre_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `Cupcake`.`Top`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Cupcake`.`Top` (
+                                               `Top_ID` INT NOT NULL AUTO_INCREMENT,
+                                               `Top_Name` VARCHAR(45) NOT NULL,
+    `Pricing` INT NOT NULL,
+    PRIMARY KEY (`Top_ID`),
+    INDEX `fk_Top_Ordrelinje1_idx` (`Top_ID` ASC) VISIBLE,
+    CONSTRAINT `fk_Top_Ordrelinje1`
+    FOREIGN KEY (`Top_ID`)
+    REFERENCES `Cupcake`.`Ordrelinje` (`Ordrelinje_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `Cupcake`.`Bottom`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Cupcake`.`Bottom` (
+                                                  `Bottom_ID` INT NOT NULL AUTO_INCREMENT,
+                                                  `Bottom_Name` VARCHAR(45) NOT NULL,
+    `Pricing` INT NOT NULL,
+    INDEX `fk_Bottom_Ordrelinje1_idx` (`Bottom_ID` ASC) VISIBLE,
+    PRIMARY KEY (`Bottom_ID`),
+    CONSTRAINT `fk_Bottom_Ordrelinje1`
+    FOREIGN KEY (`Bottom_ID`)
+    REFERENCES `Cupcake`.`Ordrelinje` (`Ordrelinje_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

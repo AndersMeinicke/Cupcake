@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-    //Hello
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><jsp:invoke fragment="header"/></title>
@@ -16,7 +15,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="/Users/rasmustaul/Documents/dat 2 sem/cupcake/Cupcake/src/main/webapp/css/style.css">
+
 </head>
 <body>
 <header>
@@ -31,7 +30,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/buyCupcake.jsp">Order</a>
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/buycupcake">Order</a>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 2</a>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 3</a>
                     <c:if test="${sessionScope.user == null }">
@@ -47,14 +46,6 @@
     </nav>
 </header>
 
-<div class="dropdown">
-    <button class="dropbtn">Dropdown</button>
-    <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-    </div>
-</div>
 
 <div id="body" class="container mt-4" style="min-height: 400px;">
     <h1><jsp:invoke fragment="header"/></h1>

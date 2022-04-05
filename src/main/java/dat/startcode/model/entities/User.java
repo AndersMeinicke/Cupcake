@@ -7,12 +7,14 @@ public class User
     private String username;
     private String password;
     private String role;
+    private int saldo;
 
     public User(String username, String password, String role)
     {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.saldo = 100;
     }
 
 
@@ -55,6 +57,14 @@ public class User
     public void setRole(String role)
     {
         this.role = role;
+    }
+
+    public int getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
     }
 
     @Override

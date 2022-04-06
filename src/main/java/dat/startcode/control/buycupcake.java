@@ -40,8 +40,8 @@ public class buycupcake extends HttpServlet {
                   Bottoms bottoms = new Bottoms(bottomID,bottomName,pricing);
                    bottomsList.add(bottoms);
                    //TODO: This sends an error code, fix it.
-                  //session.setAttribute("bottom",bottomName);
                }
+                session.setAttribute("bottomlist", bottomsList);
                request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
             }
         }catch (SQLException e){

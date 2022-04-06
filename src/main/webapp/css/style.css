@@ -1,15 +1,52 @@
 /* CSS stylesheet  for application */
+/* Nav bar */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+/**{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #ffd26d;
+}
+*/
 
-table {
-    border-collapse: collapse;
-    border: 1px solid silver;
-    padding:15px;
+li, a{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #9f7652;
+    text-decoration: none;
 }
 
-th, td {
-    border: 1px solid silver;
-    padding:15px;
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    background-color: rgba(255, 210, 109, 0.72);
 }
+
+.logo{
+    cursor:pointer;
+}
+.nav_links{
+    list-style: square;
+}
+
+.nav_links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+.nav_links li a{
+    color: #533228;
+    transition: all 0.3s ease 0s;
+
+}
+
+.nav_links li a:hover{
+    color: #9f7652;
+}
+
+
 
 /* Dropdown Button */
 .dropbtn {

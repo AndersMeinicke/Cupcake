@@ -14,7 +14,11 @@
 
     <jsp:body>
 
-        <p>Startcode for 2nd semester </p>
+        <br>
+            <div>
+                <button1 type="button"><a href="${pageContext.request.contextPath}/buycupcake">come se what we got!</a></button1>
+            </div>
+        <br>
 
         <c:if test="${sessionScope.user != null}">
             <p>You are logged in with the role of "${sessionScope.user.role}".</p>

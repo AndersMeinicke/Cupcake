@@ -39,7 +39,8 @@ public class buycupcake extends HttpServlet {
                    int pricing = rs.getInt("Pricing");
                   Bottoms bottoms = new Bottoms(bottomID,bottomName,pricing);
                    bottomsList.add(bottoms);
-                  // session.setAttribute("bottom",bottomName);
+                   //TODO: This sends an error code, fix it.
+                  //session.setAttribute("bottom",bottomName);
                }
                request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
             }

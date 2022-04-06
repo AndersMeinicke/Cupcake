@@ -15,7 +15,7 @@
     </jsp:attribute>
 <jsp:body>
     <table>
-        <b>"${sessionScope.bottom}"</b>
+        <b>${sessionScope.bottom}</b>
         <!--<c:forEach  items="${bottom}" var="bottom">
             <tr>
                 <td>${bottom.id}</td>

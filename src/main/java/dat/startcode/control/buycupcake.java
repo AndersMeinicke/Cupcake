@@ -2,6 +2,7 @@ package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.Bottoms;
+import dat.startcode.model.entities.Tops;
 import dat.startcode.model.persistence.ConnectionPool;
 
 import javax.servlet.*;
@@ -28,25 +29,38 @@ public class buycupcake extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
-        String sql = "SELECT * FROM cupcake.bottom;";
+        String sqlbottom = "SELECT * FROM cupcake.bottom;";
+        String sqltop = "SELECT * FROM cupcake.top;";
         List<Bottoms> bottomsList = new ArrayList<>();
+        List<Tops> topsList = new ArrayList<>();
         try{connectionPool.getConnection();
-            try(PreparedStatement ps = connectionPool.getConnection().prepareStatement(sql)){
+            try(PreparedStatement ps = connectionPool.getConnection().prepareStatement(sqlbottom)){
                ResultSet rs = ps.executeQuery();
                while (rs.next()){
                    int bottomID = rs.getInt("Bottom_ID");
                    String bottomName = rs.getString("Bottom_Name");
-                   int pricing = rs.getInt("Pricing");
-                  Bottoms bottoms = new Bottoms(bottomID,bottomName,pricing);
+                   int bottomPricing = rs.getInt("Pricing");
+                  Bottoms bottoms = new Bottoms(bottomID,bottomName,bottomPricing);
                    bottomsList.add(bottoms);
-                   //TODO: This sends an error code, fix it.
                }
                 session.setAttribute("bottomlist", bottomsList);
-               request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
+            }
+            try(PreparedStatement ps = connectionPool.getConnection().prepareStatement(sqltop)){
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()){
+                    int topID = rs.getInt("Top_ID");
+                    String topName = rs.getString("Top_Name");
+                    int topPricing = rs.getInt("Pricing");
+                    Tops tops = new Tops(topID,topName,topPricing);
+                    topsList.add(tops);
+                }
+                session.setAttribute("toplist",topsList);
+                request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
             }
         }catch (SQLException e){
 
         }
+
 
     }
 

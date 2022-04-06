@@ -19,7 +19,7 @@ public class Bottoms {
         return bottomName;
     }
 
-    public int getPricing() {
+    public int getBottomPricing() {
         return bottomPricing;
     }
 }

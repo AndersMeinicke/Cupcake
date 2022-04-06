@@ -14,18 +14,27 @@
         Welcome to the frontpage
     </jsp:attribute>
 <jsp:body>
+    <div class="dropdown">
+        <select class="dropbtn">Dropdown
+            <c:forEach items="${sessionScope.bottomlist}" var="bottom">
+
+                <option href="#">${bottom.bottomName}</option>
+
+            </c:forEach>
+        </select>
+    </div>
+    <div class="dropdown">
+        <select class="dropbtn">Dropdown
+            <c:forEach items="${sessionScope.toplist}" var="top">
+
+                <option href="#">${top.topName}</option>
+
+            </c:forEach>
+        </select>
+    </div>
+    <br>
     <table>
 
     </table>
-    <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
-        <div class="dropdown-content">
-            <c:forEach items="${sessionScope.bottomlist}" var="bottom">
-
-                <a href="#">${bottom.bottomName}</a>
-
-            </c:forEach>
-        </div>
-    </div>
 </jsp:body>
 </t:pagetemplate>

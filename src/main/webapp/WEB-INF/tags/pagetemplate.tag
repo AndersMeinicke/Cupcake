@@ -26,7 +26,7 @@
             <c:if test="${sessionScope.user == null }">
             <li><a href="${pageContext.request.contextPath}/login.jsp">Login</a></li>
             </c:if>
-            <li><a href="#">Cart</a></li>
+            <li><a href="${pageContext.request.contextPath}/orderlinje">Cart</a></li>
             <c:if test="${sessionScope.user != null }">
             <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
             </c:if>

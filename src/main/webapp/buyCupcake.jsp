@@ -32,6 +32,9 @@
             </c:forEach>
         </select>
     </div>
+    <div>
+        <input type="number" id="quantity" name="quantity">
+    </div>
     <br>
     <table>
 

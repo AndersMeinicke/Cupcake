@@ -2,19 +2,24 @@ package dat.startcode.model.entities;
 
 
 
-    public class orderList {
-        private int orderlist_ID;
+    public class Orderlinje {
+        private int orderlinjeID;
         private int bottomID;
         private int topID;
+        private int quantity;
 
-        public orderList(int orderlist_ID, int bottomID, int topID) {
-            this.orderlist_ID = orderlist_ID;
+
+
+        public Orderlinje(int orderlinjeID, int bottomID, int topID, int quantity) {
+            this.orderlinjeID = orderlinjeID;
             this.bottomID = bottomID;
             this.topID = topID;
+            this.quantity = quantity;
+
         }
 
-        public int getOrderlist_ID() {
-            return orderlist_ID;
+        public int getOrderlinjeID() {
+            return orderlinjeID;
         }
 
         public int getBottomID() {

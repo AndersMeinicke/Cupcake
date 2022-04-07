@@ -27,9 +27,7 @@
 
         <br>
         <h1>If you don't have an account, sign up here:</h1>
-        <li><a href="${pageContext.request.contextPath}/createUser.jsp">Order</a></li>
+        <li><a href="${pageContext.request.contextPath}/createUser.jsp">Sign Up</a></li>
         <br>
-        <h4>Check all users here:</h4>
-        <li><a href="${pageContext.request.contextPath}/showusers">Order</a></li>
     </jsp:body>
 </t:pagetemplate>

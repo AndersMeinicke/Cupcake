@@ -53,7 +53,7 @@ public class UserMapper implements IUserMapper
     {
         Logger.getLogger("web").log(Level.INFO, "");
         User user;
-        String sql = "insert into user (username, password, role) values (?,?,?)";
+        String sql = "insert into user (username, password, role,saldo) values (?,?,?,?)";
         try (Connection connection = connectionPool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
@@ -61,6 +61,7 @@ public class UserMapper implements IUserMapper
                 ps.setString(1, username);
                 ps.setString(2, password);
                 ps.setString(3, role);
+                ps.setInt(4,100);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1)
                 {

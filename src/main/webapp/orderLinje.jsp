@@ -23,7 +23,6 @@
                 </c:forEach>
             </select>
         </div>
-        ${sessionScope.ordrelinjelist}
         <div class="dropdown">
             <select class="dropbtn">Dropdown
                 <c:forEach items="${sessionScope.ordrelinjelist}" var="bottomID">

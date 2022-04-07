@@ -14,27 +14,26 @@
         Welcome to the frontpage
     </jsp:attribute>
 <jsp:body>
-    <div class="dropdown">
-        <select class="dropbtn">Dropdown
+    <form action="buycupcake" method="post">
+        <select id ="Bottom" class="dropbtn">
+            <option disabled selected value> Select a bottom</option>
             <c:forEach items="${sessionScope.bottomlist}" var="bottom">
 
-                <option href="#">${bottom.bottomName}</option>
+                <option value="bottom">${bottom.bottomName}</option>
 
             </c:forEach>
         </select>
-    </div>
-    <div class="dropdown">
-        <select class="dropbtn">Dropdown
+        <select id="Top" class="dropbtn">
+            <option disabled selected value> Select a top</option>
             <c:forEach items="${sessionScope.toplist}" var="top">
 
-                <option href="#">${top.topName}</option>
+                <option value="top">${top.topName}</option>
 
             </c:forEach>
         </select>
-    </div>
-    <div>
-        <input type="number" id="quantity" name="quantity">
-    </div>
+        <input type="number" id="quantity" name="How many do you want?">
+        <input type="submit" value="Send to cart">
+    </form>
     <br>
     <table>
 

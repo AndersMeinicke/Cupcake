@@ -30,7 +30,7 @@ public class orderlinje extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
-        String sqlorderlinje = "SELECT * FROM cupcake.orderlinje;";
+        String sqlorderlinje = "SELECT * FROM cupcake.ordrelinje;";
         //String sqltop = "SELECT * FROM cupcake.top;";
         List<Orderlinje> orderlinjeLists = new ArrayList<>();
         //List<Tops> topsList = new ArrayList<>();
@@ -38,7 +38,7 @@ public class orderlinje extends HttpServlet {
             try(PreparedStatement ps = connectionPool.getConnection().prepareStatement(sqlorderlinje)){
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()){
-                    int orderlineID = rs.getInt("Orderlinje_ID");
+                    int orderlineID = rs.getInt("Ordrelinje_ID");
                     int bottomID = rs.getInt("Bottom_ID");
                     int topID = rs.getInt("Top_ID");
                     int quantity = rs.getInt("Quantity");
@@ -46,12 +46,11 @@ public class orderlinje extends HttpServlet {
                     orderlinjeLists.add(orderlinje);
                 }
                 session.setAttribute("ordrelinjelist", orderlinjeLists);
-
+                request.getRequestDispatcher("orderLinje.jsp").forward(request,response);
             }
         }catch (SQLException e){
 
         }
-        request.getRequestDispatcher("orderLinje.jsp").forward(request,response);
 
 
     }

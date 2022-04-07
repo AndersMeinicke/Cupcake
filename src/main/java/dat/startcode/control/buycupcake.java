@@ -3,6 +3,7 @@ package dat.startcode.control;
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.Bottoms;
 import dat.startcode.model.entities.Tops;
+import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
 
 import javax.servlet.*;
@@ -66,6 +67,44 @@ public class buycupcake extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
+        HttpSession session = request.getSession();
+        String makeOrdrelinjeSql = "INSERT INTO cupcake.ordrelinje (Bottom_ID, Top_ID, Quantity) VALUES (?, ?, ?);";
+        String getBottomIDSql = "SELECT * FROM cupcake.bottom WHERE Bottom_Name = ?";
+        String getTopIDSql = "SELECT * FROM cupcake.top WHERE Top_Name = ?";
+        String bottom = request.getParameter("bottom");
+        String top = request.getParameter("top");
+        int bottomID = 0;
+        int topID = 0;
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        try{connectionPool.getConnection();
+            try(PreparedStatement ps = connectionPool.getConnection().prepareStatement(getBottomIDSql)){
+                ps.setString(1,bottom);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()){
+                    bottomID = rs.getInt("Bottom_ID");
+                }
 
+            }
+            try(PreparedStatement ps = connectionPool.getConnection().prepareStatement(getTopIDSql)){
+                ps.setString(1,top);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()){
+                    topID = rs.getInt("Bottom_ID");
+                }
+
+            }
+            try(PreparedStatement ps = connectionPool.getConnection().prepareStatement(makeOrdrelinjeSql)){
+                ps.setInt(1,bottomID);
+                ps.setInt(2,topID);
+                ps.setInt(3,quantity);
+                ResultSet rs = ps.executeQuery();
+
+            }
+            request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
+        }
+        catch (SQLException e){
+
+        }
     }
 }

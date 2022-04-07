@@ -17,19 +17,18 @@
 
         <h3>You can log in here</h3>
 
-        <form action="login" method="post">
+        <form action="createuser" method="post">
             <label for="username">Username: </label>
             <input type="text" id="username" name="username"/>
             <label for="password">Password: </label>
             <input type="password" id="password" name="password"/>
-            <input type="submit"  value="Log in"/>
+            <select name="role">
+                <option disabled selected value> Select a role</option>
+                <option value="admin">admin</option>
+                <option value="user">user</option>
+            </select>
+            <input type="submit"  value="create"/>
         </form>
 
-        <br>
-        <h1>If you don't have an account, sign up here:</h1>
-        <li><a href="${pageContext.request.contextPath}/createUser.jsp">Order</a></li>
-        <br>
-        <h4>Check all users here:</h4>
-        <li><a href="${pageContext.request.contextPath}/showusers">Order</a></li>
     </jsp:body>
 </t:pagetemplate>

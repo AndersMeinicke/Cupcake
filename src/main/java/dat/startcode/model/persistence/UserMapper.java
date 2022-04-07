@@ -65,6 +65,7 @@ public class UserMapper implements IUserMapper
                 if (rowsAffected == 1)
                 {
                     user = new User(username, password, role);
+
                 } else
                 {
                     throw new DatabaseException("The user with username = " + username + " could not be inserted into the database");

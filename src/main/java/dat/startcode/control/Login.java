@@ -49,7 +49,6 @@ public class Login extends HttpServlet
             user = userMapper.login(username, password);
             session = request.getSession();
             session.setAttribute("user", user); // adding user object to session scope
-            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
         catch (DatabaseException e)
         {
@@ -57,6 +56,7 @@ public class Login extends HttpServlet
             request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     public void destroy()

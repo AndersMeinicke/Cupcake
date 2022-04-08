@@ -29,6 +29,7 @@ public class buycupcake extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
+        ServletContext context = getServletContext();
         HttpSession session = request.getSession();
         String sqlbottom = "SELECT * FROM cupcake.bottom;";
         String sqltop = "SELECT * FROM cupcake.top;";
@@ -45,6 +46,8 @@ public class buycupcake extends HttpServlet {
                    bottomsList.add(bottoms);
                }
                 session.setAttribute("bottomlist", bottomsList);
+                context.setAttribute("bottomlist", bottomsList);
+
             }
             try(PreparedStatement ps = connectionPool.getConnection().prepareStatement(sqltop)){
                 ResultSet rs = ps.executeQuery();
@@ -56,6 +59,7 @@ public class buycupcake extends HttpServlet {
                     topsList.add(tops);
                 }
                 session.setAttribute("toplist",topsList);
+                context.setAttribute("toplist",topsList);
                 request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
             }
         }catch (SQLException e){

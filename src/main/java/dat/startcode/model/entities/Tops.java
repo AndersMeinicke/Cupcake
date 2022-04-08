@@ -11,11 +11,11 @@ public class Tops {
         this.topPricing = pricing;
     }
 
-    public int gettopID() {
+    public int getTopID() {
         return topID;
     }
 
-    public String gettopName() {
+    public String getTopName() {
         return topName;
     }
 

@@ -4,16 +4,16 @@ package dat.startcode.model.entities;
 
     public class Orderlinje {
         private int orderlinjeID;
-        private int bottomID;
-        private int topID;
+        private Bottoms bottom;
+        private Tops top;
         private int quantity;
 
 
 
-        public Orderlinje(int orderlinjeID, int bottomID, int topID, int quantity) {
+        public Orderlinje(int orderlinjeID, Bottoms bottom, Tops top, int quantity) {
             this.orderlinjeID = orderlinjeID;
-            this.bottomID = bottomID;
-            this.topID = topID;
+            this.bottom = bottom;
+            this.top = top;
             this.quantity = quantity;
 
         }
@@ -22,12 +22,14 @@ package dat.startcode.model.entities;
             return orderlinjeID;
         }
 
-        public int getBottomID() {
-            return bottomID;
+        public Bottoms getBottom() {
+            return bottom;
         }
 
-        public int getTopID() {
-            return topID;
+        public Tops getTop() {
+            return top;
         }
+
+        public int getQuantity() { return quantity; }
     }
 

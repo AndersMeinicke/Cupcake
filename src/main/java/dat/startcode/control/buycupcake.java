@@ -10,10 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.Array;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +31,9 @@ public class buycupcake extends HttpServlet {
         String sqltop = "SELECT * FROM cupcake.top;";
         List<Bottoms> bottomsList = new ArrayList<>();
         List<Tops> topsList = new ArrayList<>();
-        try{connectionPool.getConnection();
-            try(PreparedStatement ps = connectionPool.getConnection().prepareStatement(sqlbottom)){
+        try{
+            Connection connection = connectionPool.getConnection();
+            try(PreparedStatement ps = connection.prepareStatement(sqlbottom)){
                ResultSet rs = ps.executeQuery();
                while (rs.next()){
                    int bottomID = rs.getInt("Bottom_ID");
@@ -43,10 +41,11 @@ public class buycupcake extends HttpServlet {
                    int bottomPricing = rs.getInt("Pricing");
                   Bottoms bottoms = new Bottoms(bottomID,bottomName,bottomPricing);
                    bottomsList.add(bottoms);
+                   session = request.getSession();
                }
                 session.setAttribute("bottomlist", bottomsList);
             }
-            try(PreparedStatement ps = connectionPool.getConnection().prepareStatement(sqltop)){
+            try(PreparedStatement ps = connection.prepareStatement(sqltop)){
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()){
                     int topID = rs.getInt("Top_ID");
@@ -57,6 +56,7 @@ public class buycupcake extends HttpServlet {
                 }
                 session.setAttribute("toplist",topsList);
                 request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
+                connection.close();
             }
         }catch (SQLException e){
 
@@ -79,12 +79,13 @@ public class buycupcake extends HttpServlet {
                 ps.setInt(2,topID);
                 ps.setInt(3,quantity);
                 ps.executeUpdate();
+                session = request.getSession();
             }
-            request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
         }
         catch (SQLException e){
             session.setAttribute("error","der skete en fejl");
             request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
         }
+        request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
     }
 }

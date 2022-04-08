@@ -3,14 +3,12 @@ package dat.startcode.control;
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.Bottoms;
 import dat.startcode.model.entities.Tops;
-import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "buycupcake", value = "/buycupcake")
-public class buycupcake extends HttpServlet {
+public class BuyCupcakeServlet extends HttpServlet {
     private ConnectionPool connectionPool;
 
     @Override

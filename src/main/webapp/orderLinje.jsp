@@ -7,7 +7,7 @@
 <%@page errorPage="error.jsp" isErrorPage="false" %>
 <t:pagetemplate>
     <jsp:attribute name="header">
-         What you buying?
+         Cart
     </jsp:attribute>
 
     <jsp:attribute name="footer">
@@ -22,23 +22,32 @@
 <%----%>
         <table>
             <tr>
-                <th>orderlinjeID</th>
-                <th>bottomID</th>
-                <th>topID</th>
+                <th>ordrelinjeID</th>
+                <th>top</th>
+                <th>bottom</th>
+                <th>quantity</th>
             </tr>
-            <tr>
-                <c:forEach items="${sessionScope.ordrelinjelist}" var="topID">
-                    <td><c:out value="${topID.topID}" /></td>
+
+
+                <c:forEach items="${sessionScope.ordrelinjelist}" var="ordrelinjeValues">
+                    <tr>
+                        <td><c:out value="${ordrelinjeValues.orderlinjeID}" /></td>
+                    <td><c:out value="${ordrelinjeValues.top.topName}" />(<c:out value="${ordrelinjeValues.top.pricing}" />)</td>
+                    <td><c:out value="${ordrelinjeValues.bottom.bottomName}" /></td>
+                        <td><c:out value="${ordrelinjeValues.quantity}" /></td>
+                </tr>
                 </c:forEach>
 
-                <c:forEach items="${sessionScope.ordrelinjelist}" var="orderlinjeID">
-                    <td><c:out value="${orderlinjeID.orderlinjeID}" /></td>
-                </c:forEach>
 
-                <c:forEach items="${sessionScope.ordrelinjelist}" var="bottomID">
-                    <td><c:out value="${bottomID.bottomID}" /></td>
-                </c:forEach>
-            </tr>
+
+<%--                <c:forEach items="${sessionScope.ordrelinjelist}" var="orderlinjeID">--%>
+<%--                    <td><c:out value="${orderlinjeID.orderlinjeID}" /></td>--%>
+<%--                </c:forEach>--%>
+
+<%--                <c:forEach items="${sessionScope.ordrelinjelist}" var="bottomID">--%>
+<%--                    <td><c:out value="${bottomID.bottomID}" /></td>--%>
+<%--                </c:forEach>--%>
+<%--            </tr>--%>
 <%--            <tr>--%>
 <%--                <td>Centro comercial Moctezuma</td>--%>
 <%--                <td>Francisco Chang</td>--%>

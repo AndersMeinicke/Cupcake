@@ -12,7 +12,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "createuser", value = "/createuser")
-public class createuser extends HttpServlet {
+public class CreateUserServlet extends HttpServlet {
     private ConnectionPool connectionPool;
 
 

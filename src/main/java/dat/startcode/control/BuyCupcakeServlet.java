@@ -11,11 +11,14 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "buycupcake", value = "/buycupcake")
-public class buycupcake extends HttpServlet {
+public class BuyCupcakeServlet extends HttpServlet {
     private ConnectionPool connectionPool;
 
     @Override
@@ -85,6 +88,7 @@ public class buycupcake extends HttpServlet {
                 ps.executeUpdate();
                 session = request.getSession();
             }
+            request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
         }
         catch (SQLException e){
             session.setAttribute("error","der skete en fejl");

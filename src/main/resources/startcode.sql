@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `cupcake` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `cupcake`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: localhost    Database: cupcake
@@ -51,12 +49,9 @@ DROP TABLE IF EXISTS `ordre`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ordre` (
                          `Ordre_ID` int NOT NULL AUTO_INCREMENT,
-                         `User_ID` int NOT NULL,
                          `Total_Price` int NOT NULL,
-                         `Ordrelinje_ID` int NOT NULL,
-                         PRIMARY KEY (`Ordre_ID`),
-                         KEY `fk_Ordre_User1_idx` (`User_ID`),
-                         CONSTRAINT `fk_Ordre_User1` FOREIGN KEY (`User_ID`) REFERENCES `user` (`User_ID`)
+                         `Ordrelinje_ID` varchar(100) DEFAULT NULL,
+                         PRIMARY KEY (`Ordre_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -81,11 +76,8 @@ CREATE TABLE `ordrelinje` (
                               `Bottom_ID` int NOT NULL,
                               `Top_ID` int NOT NULL,
                               `Quantity` int NOT NULL,
-                              `Order_ID` int NOT NULL,
-                              PRIMARY KEY (`Ordrelinje_ID`),
-                              KEY `fk_Ordrelinje_Ordre1_idx` (`Order_ID`),
-                              CONSTRAINT `fk_Ordrelinje_Ordre1` FOREIGN KEY (`Order_ID`) REFERENCES `ordre` (`Ordre_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+                              PRIMARY KEY (`Ordrelinje_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,6 +86,7 @@ CREATE TABLE `ordrelinje` (
 
 LOCK TABLES `ordrelinje` WRITE;
 /*!40000 ALTER TABLE `ordrelinje` DISABLE KEYS */;
+INSERT INTO `ordrelinje` VALUES (1,1,1,2);
 /*!40000 ALTER TABLE `ordrelinje` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,8 +128,9 @@ CREATE TABLE `user` (
                         `password` varchar(45) NOT NULL,
                         `role` varchar(45) NOT NULL,
                         `saldo` int NOT NULL,
+                        `Order_ID` int DEFAULT NULL,
                         PRIMARY KEY (`User_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +139,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'anders','1234','admin',10000);
+INSERT INTO `user` VALUES (1,'anders','1234','admin',10000,NULL),(2,'a','123','admin',1000,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -158,4 +152,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-06 10:05:13
+-- Dump completed on 2022-04-12  9:41:19

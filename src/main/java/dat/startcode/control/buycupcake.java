@@ -91,5 +91,6 @@ public class buycupcake extends HttpServlet {
             request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
         }
         request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
+        connectionPool.close();
     }
 }

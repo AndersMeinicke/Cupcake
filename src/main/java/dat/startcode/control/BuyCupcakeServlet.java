@@ -80,8 +80,9 @@ public class BuyCupcakeServlet extends HttpServlet {
         int bottomID = Integer.parseInt(request.getParameter("bottom"));;
         int topID = Integer.parseInt(request.getParameter("top"));;
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        try{connectionPool.getConnection();
-            try(PreparedStatement ps = connectionPool.getConnection().prepareStatement(makeOrdrelinjeSql)){
+        try{
+            Connection connection = connectionPool.getConnection();
+            try(PreparedStatement ps = connection.prepareStatement(makeOrdrelinjeSql)){
                 ps.setInt(1,bottomID);
                 ps.setInt(2,topID);
                 ps.setInt(3,quantity);
@@ -89,12 +90,12 @@ public class BuyCupcakeServlet extends HttpServlet {
                 session = request.getSession();
             }
             request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
+            connection.close();
         }
         catch (SQLException e){
             session.setAttribute("error","der skete en fejl");
             request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
         }
         request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
-        connectionPool.close();
     }
 }

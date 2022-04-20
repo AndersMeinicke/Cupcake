@@ -2,14 +2,14 @@ package dat.startcode.model.persistence;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import dat.startcode.model.config.ApplicationStart;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ConnectionPool
-{
+public class ConnectionPool extends ApplicationStart {
     private HikariDataSource ds;
     private static String USER = "cupcake";
     private static String PASSWORD = "cupcake";

@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+class Profil
+class User
+class Order
+class OrderList
+class CupcakeTop
+class CupcakeBottom
+class CreateCupcake
+class FinishedCupcake
+
+User "1" -- "1.."Profil: User logs into profil
+Profil - CreateCupcake: Ordering a new Cupcake
+CreateCupcake "1" ---> "1" CupcakeTop: chooses a top
+CreateCupcake "1" --> "1"CupcakeBottom: chooses a bottom
+Profil "1" -up- "1" Order
+OrderList "*" --> "1" Order: Sends a cupcake
+CupcakeTop "1" -->  "1"FinishedCupcake
+CupcakeBottom "1" -->  "1"FinishedCupcake
+FinishedCupcake "1.." -> "1"OrderList
+@enduml

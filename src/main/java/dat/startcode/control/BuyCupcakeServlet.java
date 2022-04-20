@@ -75,7 +75,10 @@ public class BuyCupcakeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
+
         HttpSession session = request.getSession();
+        try {
+
         String makeOrdrelinjeSql = "INSERT INTO cupcake.ordrelinje (Bottom_ID, Top_ID, Quantity) VALUES (?, ?, ?);";
         int bottomID = Integer.parseInt(request.getParameter("bottom"));;
         int topID = Integer.parseInt(request.getParameter("top"));;
@@ -97,5 +100,10 @@ public class BuyCupcakeServlet extends HttpServlet {
             request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
         }
         request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
+    }
+      catch (NumberFormatException e){
+          session.setAttribute("error","huske at fyld alle felterne ud, før du bestiller");
+          request.getRequestDispatcher("buyCupcake.jsp").forward(request,response);
+      }
     }
 }

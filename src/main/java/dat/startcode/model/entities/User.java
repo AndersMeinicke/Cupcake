@@ -1,9 +1,10 @@
 package dat.startcode.model.entities;
 
+import dat.startcode.control.BuyCupcakeServlet;
+
 import java.util.Objects;
 
-public class User
-{
+public class User {
     private String username;
     private String password;
     private String role;

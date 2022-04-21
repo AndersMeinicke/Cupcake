@@ -1,0 +1,23 @@
+@startuml
+scale 500 width
+title Cupcake : state diagram
+state index.jsp
+state login.jsp
+state createUser.jsp
+state buyCupcake.jsp
+state ordrelinje.jsp
+state logout
+
+note left of logout
+i nav bar
+end note
+
+[*] -> index.jsp
+index.jsp --> login.jsp: login
+login.jsp --> index.jsp: login[ok]
+login.jsp --> createUser.jsp: sign up
+createUser.jsp --> index.jsp: create
+index.jsp --> buyCupcake.jsp: order
+index.jsp --> ordrelinje.jsp: cart
+
+@enduml
